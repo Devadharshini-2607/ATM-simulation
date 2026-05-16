@@ -1,0 +1,46 @@
+users = {
+    "deva": {"pin": "0000", "balance": 5000}
+}
+
+print("----- Welcome to ATM -----")
+
+username = input("Enter username: ")
+pin = input("Enter PIN: ")
+
+# Authentication
+if username in users and users[username]["pin"] == pin:
+    print("Login successful!\n")
+    
+    while True:
+        print("1. Check Balance")
+        print("2. Deposit")
+        print("3. Withdraw")
+        print("4. Exit")
+        
+        choice = input("Choose option: ")
+        
+        if choice == "1":
+            print("Balance:", users[username]["balance"])
+        
+        elif choice == "2":
+            amount = float(input("Enter amount to deposit: "))
+            users[username]["balance"] += amount
+            print("Deposited successfully!")
+        
+        elif choice == "3":
+            amount = float(input("Enter amount to withdraw: "))
+            if amount <= users[username]["balance"]:
+                users[username]["balance"] -= amount
+                print("Withdraw successful!")
+            else:
+                print("Insufficient balance!")
+        
+        elif choice == "4":
+            print("Thank you for using ATM!")
+            break
+        
+        else:
+            print("Invalid option! Try again.")
+
+else:
+    print("Invalid username or PIN!")
